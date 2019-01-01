@@ -2,6 +2,7 @@ const path = require('path');
 const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base.js');
 const webpackNodeExternals = require('webpack-node-externals');
+const webpack = require('webpack');
 
 const config = {
     // inform webpack we are building for nodejs
@@ -18,6 +19,10 @@ const config = {
     },
 
     externals: [webpackNodeExternals()],
+
+    plugins: [
+        new webpack.BannerPlugin({ banner: "#!/usr/bin/env node", raw: true }),
+    ],
 };
 
 module.exports = merge(baseConfig, config);

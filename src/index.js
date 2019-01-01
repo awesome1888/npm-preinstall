@@ -1,5 +1,6 @@
 import '@babel/polyfill';
 import fs from 'fs';
+import debug from 'debug';
 import execute from './execute';
 import { areFilesEqual } from 'fs-equal';
 import copyFilesSync from 'fs-copy-file-sync';
@@ -22,11 +23,16 @@ import copyFilesSync from 'fs-copy-file-sync';
         }
     }
 
-    process.argv.shift(); // drop the command itself
-    process.argv.shift(); // drop the command itself
+    debug(process.argv.join(' '));
+
+    process.argv.shift(); // drop the "node" command
+    process.argv.shift(); // drop the file name
     const cmdToRun = process.argv.shift();
 
     if (cmdToRun && cmdToRun.length) {
+        debug(`Executing ${cmdToRun}`);
         await execute(cmdToRun, process.argv);
     }
+
+    debug('Done');
 })();

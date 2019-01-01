@@ -1,15 +1,18 @@
 {
-  "name": "npm-i",
+  "name": "npm-preinstall",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "npm-preinstall": "./build/server.js"
+  },
   "scripts": {
-    "build": "npm-run-all --parallel build.*",
-    "build.server": "webpack --config webpack.server.js --mode production",
-    "build.client": "webpack --config webpack.client.js --mode production",
-    "dev.build": "npm-run-all --parallel dev.build.*",
-    "dev.build.server": "webpack --config webpack.server.js --mode development",
-    "dev.build.client": "webpack --config webpack.client.js --mode development",
+    "build": "npm-run-all --parallel build.*.prod",
+    "build.server.prod": "webpack --config webpack.server.js --mode production",
+    "build.client.prod": "webpack --config webpack.client.js --mode production",
+    "build.dev": "npm-run-all --parallel build.*.dev",
+    "build.server.dev": "webpack --config webpack.server.js --mode development",
+    "build.client.dev": "webpack --config webpack.client.js --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -25,5 +28,11 @@
     "webpack-cli": "^3.1.2",
     "webpack-merge": "^4.1.5",
     "webpack-node-externals": "^1.7.2"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.2.5",
+    "debug": "^4.1.1",
+    "fs-copy-file-sync": "^1.1.1",
+    "fs-equal": "^2.0.0"
   }
 }
