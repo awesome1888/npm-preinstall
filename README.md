@@ -21,7 +21,7 @@ Suppose, you have a monorepo. Define a `workspace` `Yarn` instruction inside you
 ~~~~
 
 ~~~~bash
-npm install npm-preinstall -g
+npm install npm-preinstall --save-dev
 ~~~~
 
 Then, write a startup script like this:
@@ -31,7 +31,7 @@ Then, write a startup script like this:
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
 
-npm-preinstall --monorepo
+npx npm-preinstall --monorepo
 
 docker stop $(docker ps -aq) > /dev/null
 docker-compose -f ${DIR}/../docker/development.yml up
@@ -51,4 +51,4 @@ RUN npm install serverless npm-preinstall -g
 CMD ["npm-preinstall", "npm", "run", "start"]
 ~~~~
 
-Note, that it will some take time to install massive amount of files to a volume from a container. Also, sometimes `npm` simply fails to do that.
+Note, that it will take some time to install massive amount of files to a volume from a container. Also, sometimes `npm` simply fails to do that.
