@@ -26,7 +26,7 @@ const installTo = async (folder) => {
             copyFilesSync(file, fileLock);
 
             const overrides = path.join(folder, '.node_modules_patches');
-            const nodeModules = path.join(folder, '.node_modules');
+            const nodeModules = path.join(folder, 'node_modules');
 
             if (fs.existsSync(overrides)) {
                 console.log('>>>>>> Applying node_modules monkey-patch 🙈');
