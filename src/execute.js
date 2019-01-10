@@ -5,10 +5,11 @@ const execute = (cmd, args = [], params = {}) => {
 
     const stdoutTo = params.stdoutTo || process.stdout;
     const stderrTo = params.stderrTo || process.stderr;
+    const cwd = params.cwd || process.cwd;
 
     return new Promise((resolve) => {
         const handle = spawn(cmd, args, {
-            cwd: process.cwd(),
+            cwd,
             stdio: 'inherit',
             shell: true,
         });
