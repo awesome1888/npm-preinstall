@@ -2,6 +2,12 @@
 
 The module tries to solve [this issue](https://stackoverflow.com/questions/30043872/docker-compose-node-modules-not-present-in-a-volume-after-npm-install-succeeds).
 
+## Installation
+
+~~~~bash
+npm install npm-preinstall --save-dev
+~~~~
+
 ## Usage
 
 There are two ways
@@ -20,8 +26,12 @@ Suppose, you have a monorepo. Define a `workspace` `Yarn` instruction inside you
 }
 ~~~~
 
-~~~~bash
-npm install npm-preinstall --save-dev
+Or, instead, you may create `.preinstallrc` like this:
+
+~~~~yaml
+packages:
+    wildcard:
+        'packages/*'
 ~~~~
 
 Then, write a startup script like this:
@@ -48,7 +58,13 @@ FROM node:8.10
 RUN apt-get update && apt-get install -y --no-install-recommends vim && apt-get clean
 WORKDIR /app
 RUN npm install serverless npm-preinstall -g
-CMD ["npm-preinstall", "npm", "run", "start"]
+CMD ["npm-preinstall", '--cmd=\"npm run start\"']
 ~~~~
 
 Note, that it will take some time to install massive amount of files to a volume from a container. Also, sometimes `npm` simply fails to do that.
+
+## Use yarn instead of npm:
+
+~~~~
+npx npm-preinstall --use-yarn ...
+~~~~
